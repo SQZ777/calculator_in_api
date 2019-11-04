@@ -7,7 +7,7 @@ namespace TestCalculator
     public class TestCalculatorService
     {
         [TestMethod]
-        public void Add_Input_0_and_0_Should_Return_true()
+        public void Add_Input_0_and_0_Should_Return_0()
         {
             var calculatorService = new CalculatorService();
             var num1 = 0;
@@ -18,5 +18,6 @@ namespace TestCalculator
             
             Assert.AreEqual(expect, actual);
         }
+
     }
 }
