@@ -17,12 +17,11 @@ namespace CalculatorInApi.Controllers
 
         public IActionResult Add(int num1, int num2)
         {
-
             if (_calculatorService.CheckNumber(num1, num2))
             {
                 return Ok(_calculatorService.Add(num1, num2));
             }
-            throw new NotImplementedException();
+            return BadRequest("InputIsIllegally");
         }
     }
 }
