@@ -18,14 +18,9 @@ namespace TestCalculator
         {
             var num1 = 0;
             var num2 = 0;
-            var mockCalculatorService = new Mock<ICalculatorService>();
-            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(true);
-            mockCalculatorService.Setup(x => x.Add(num1, num2)).Returns(0);
-            var calculatorController = new CalculatorController(mockCalculatorService.Object);
-
+            var calculatorController = SetCalculatorControllerInstance(num1, num2, true);
             var actual = calculatorController.Add(num1, num2) as OkObjectResult;
             var expect = new OkObjectResult(0);
-
             Assert.AreEqual(expect.Value, actual.Value);
         }
 
@@ -34,15 +29,18 @@ namespace TestCalculator
         {
             var num1 = 2147483647;
             var num2 = 1;
-            var mockCalculatorService = new Mock<ICalculatorService>();
-            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(false);
-            mockCalculatorService.Setup(x => x.Add(num1, num2)).Returns(0);
-            var calculatorController = new CalculatorController(mockCalculatorService.Object);
-
+            var calculatorController = SetCalculatorControllerInstance(num1, num2, false);
             var actual = calculatorController.Add(num1, num2) as BadRequestObjectResult;
             var expect = new BadRequestObjectResult("InputIsIllegally");
-
             Assert.AreEqual(expect.Value, actual.Value);
+        }
+
+        private CalculatorController SetCalculatorControllerInstance(int num1, int num2, bool checkNumberReturn)
+        {
+            var mockCalculatorService = new Mock<ICalculatorService>();
+            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(checkNumberReturn);
+            mockCalculatorService.Setup(x => x.Add(num1, num2)).Returns(0);
+            return new CalculatorController(mockCalculatorService.Object);
         }
     }
 }
