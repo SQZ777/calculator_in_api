@@ -1,3 +1,4 @@
+using CalculatorInApi.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestCalculator
@@ -6,8 +7,16 @@ namespace TestCalculator
     public class TestCalculatorService
     {
         [TestMethod]
-        public void Input_null_and_null_Should_Return_Error()
+        public void Add_Input_0_and_0_Should_Return_true()
         {
+            var calculatorService = new CalculatorService();
+            var num1 = 0;
+            var num2 = 0;
+            var actual = calculatorService.Add(num1, num2);
+
+            var expect = 0;
+            
+            Assert.AreEqual(expect, actual);
         }
     }
 }
