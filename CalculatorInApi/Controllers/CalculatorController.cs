@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CalculatorInApi.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CalculatorController : Controller
     {
         private readonly ICalculatorService _calculatorService;
@@ -15,7 +17,8 @@ namespace CalculatorInApi.Controllers
             this._calculatorService = calculatorService;
         }
 
-        public IActionResult Add(int num1, int num2)
+        [HttpGet("Add")]
+        public IActionResult Add([FromQuery]int num1, int num2)
         {
             if (_calculatorService.CheckNumber(num1, num2))
             {
