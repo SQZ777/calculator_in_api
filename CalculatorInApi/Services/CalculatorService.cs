@@ -11,8 +11,11 @@ namespace CalculatorInApi.Services
 
         public bool CheckNumber(long num1, long num2)
         {
+            if (num1 + num2 > 2147483647)
+            {
+                return false;
+            }
             return true;
-            throw new System.NotImplementedException();
         }
     }
 }
