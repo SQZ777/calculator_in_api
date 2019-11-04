@@ -19,5 +19,16 @@ namespace TestCalculator
             Assert.AreEqual(expect, actual);
         }
 
+        [TestMethod]
+        public void Add_Input_1_and_1_Should_Return_2()
+        {
+            var calculatorService = new CalculatorService();
+            var num1 = 1;
+            var num2 = 1;
+            var actual = calculatorService.Add(num1, num2);
+
+            var expect = 2;
+            Assert.AreEqual(expect, actual);
+        }
     }
 }
