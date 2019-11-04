@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TestCalculator
 {
     [TestClass]
-    public class TestCalculatorService
+    public class TestCalculatorServiceAdd
     {
         [TestMethod]
         public void Add_Input_0_and_0_Should_Return_0()
