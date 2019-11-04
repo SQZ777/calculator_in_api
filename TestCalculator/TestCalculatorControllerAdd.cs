@@ -35,6 +35,17 @@ namespace TestCalculator
             Assert.AreEqual(expect.Value, actual.Value);
         }
 
+        [TestMethod]
+        public void Add_minus2147483648_and_minus1_Should_be_InputIsIllegally_and_StatusCode_400()
+        {
+            var num1 = -2147483648;
+            var num2 = -1;
+            var calculatorController = SetCalculatorControllerInstance(num1, num2, false);
+            var actual = calculatorController.Add(num1, num2) as BadRequestObjectResult;
+            var expect = new BadRequestObjectResult("InputIsIllegally");
+            Assert.AreEqual(expect.Value, actual.Value);
+        }
+
         private CalculatorController SetCalculatorControllerInstance(int num1, int num2, bool checkNumberReturn)
         {
             var mockCalculatorService = new Mock<ICalculatorService>();
