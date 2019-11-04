@@ -6,7 +6,7 @@ namespace CalculatorInApi.Services
     {
         public int Add(int number1, int number2)
         {
-            throw new System.NotImplementedException();
+            return 0;
         }
     }
 }
