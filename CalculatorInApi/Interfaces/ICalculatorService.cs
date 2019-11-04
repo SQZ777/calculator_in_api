@@ -8,5 +8,7 @@ namespace CalculatorInApi.Interfaces
     public interface ICalculatorService
     {
         int Add(int number1, int number2);
+
+        bool CheckNumber(long num1, long num2);
     }
 }

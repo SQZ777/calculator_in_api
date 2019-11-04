@@ -8,5 +8,11 @@ namespace CalculatorInApi.Services
         {
             return number1 + number2;
         }
+
+        public bool CheckNumber(long num1, long num2)
+        {
+            return true;
+            throw new System.NotImplementedException();
+        }
     }
 }
