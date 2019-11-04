@@ -9,7 +9,7 @@ namespace CalculatorInApi.Controllers
 {
     public class CalculatorController : Controller
     {
-        private ICalculatorService _calculatorService;
+        private readonly ICalculatorService _calculatorService;
         public CalculatorController(ICalculatorService calculatorService)
         {
             this._calculatorService = calculatorService;
