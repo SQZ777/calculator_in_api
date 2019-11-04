@@ -24,6 +24,14 @@ namespace TestCalculator
             Assert.AreEqual(expect, actual);
         }
 
+        [TestMethod]
+        public void Add_Input_minus1_and_minus1_Return_minus2()
+        {
+            var actual = CalculatorServiceAdd(-1, -1);
+            var expect = -2;
+            Assert.AreEqual(expect, actual);
+        }
+
         private int CalculatorServiceAdd(int num1, int num2)
         {
             var calculatorService = new CalculatorService();
