@@ -28,5 +28,21 @@ namespace TestCalculator
 
             Assert.AreEqual(expect.Value, actual.Value);
         }
+
+        [TestMethod]
+        public void Add_2147483647_and_1_Should_be_InputIsIllegally_and_StatusCode_400()
+        {
+            var num1 = 2147483647;
+            var num2 = 1;
+            var mockCalculatorService = new Mock<ICalculatorService>();
+            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(false);
+            mockCalculatorService.Setup(x => x.Add(num1, num2)).Returns(0);
+            var calculatorController = new CalculatorController(mockCalculatorService.Object);
+
+            var actual = calculatorController.Add(num1, num2) as BadRequestObjectResult;
+            var expect = new BadRequestObjectResult("InputIsIllegally");
+
+            Assert.AreEqual(expect.Value, actual.Value);
+        }
     }
 }
