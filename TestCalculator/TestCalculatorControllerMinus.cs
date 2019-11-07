@@ -18,6 +18,7 @@ namespace TestCalculator
         {
             var mockService = new Mock<ICalculatorService>();
             mockService.Setup(x => x.Minus(1, 1)).Returns(0);
+            mockService.Setup(x => x.CheckNumber(1, 1)).Returns(true);
             var calculatorController = new CalculatorController(mockService.Object);
             var actual = calculatorController.Minus(1, 1) as OkObjectResult;
             var expect = new OkObjectResult(0);
