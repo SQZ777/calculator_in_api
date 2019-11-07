@@ -16,11 +16,7 @@ namespace TestCalculator
         [TestMethod]
         public void Minus_1_and_1_Should_Be_0()
         {
-            var num1 = 1;
-            var num2 = 1;
-            SetCalculatorController(num1, num2, false);
-            var calculatorController = SetCalculatorController(num1, num2, true);
-            var actual = calculatorController.Minus(num1, num2) as OkObjectResult;
+            var actual = MinusWhenExpectIsOk(1, 1, 0);
             var expect = new OkObjectResult(0);
             Assert.AreEqual(expect.Value, actual.Value);
         }
@@ -28,13 +24,28 @@ namespace TestCalculator
         [TestMethod]
         public void Minus_m2147483648_and_1_Should_Be_BadRequest_InputIsIllegally()
         {
-            var num1 = -2147483648;
-            var num2 = 1;
-            SetCalculatorController(num1, num2, false);
-            var calculatorController = SetCalculatorController(num1, num2, false);
-            var actual = calculatorController.Minus(num1, num2) as BadRequestObjectResult;
+            var actual = MinusWhenExpectIsBadRequest(-2147483648, 1);
             var expect = new BadRequestObjectResult("InputIsIllegally");
             Assert.AreEqual(expect.Value, actual.Value);
+        }
+
+        private OkObjectResult MinusWhenExpectIsOk(int num1, int num2, int mockAddReturn)
+        {
+            var mockCalculatorService = new Mock<ICalculatorService>();
+            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(true);
+            mockCalculatorService.Setup(x => x.Minus(num1, num2)).Returns(mockAddReturn);
+            var calculatorController = new CalculatorController(mockCalculatorService.Object);
+            var actual = calculatorController.Add(num1, num2) as OkObjectResult;
+            return actual;
+        }
+
+        private BadRequestObjectResult MinusWhenExpectIsBadRequest(int num1, int num2)
+        {
+            var mockCalculatorService = new Mock<ICalculatorService>();
+            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(false);
+            var calculatorController = new CalculatorController(mockCalculatorService.Object);
+            var actual = calculatorController.Minus(num1, num2) as BadRequestObjectResult;
+            return actual;
         }
 
         private CalculatorController SetCalculatorController(int num1, int num2, bool checkNumberShouldReturn)
