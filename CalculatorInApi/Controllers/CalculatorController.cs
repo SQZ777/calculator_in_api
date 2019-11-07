@@ -27,6 +27,7 @@ namespace CalculatorInApi.Controllers
             return BadRequest("InputIsIllegally");
         }
 
+        [HttpGet("Minus")]
         public IActionResult Minus(int num1, int num2)
         {
             if (_calculatorService.CheckNumber(num1, num2))
