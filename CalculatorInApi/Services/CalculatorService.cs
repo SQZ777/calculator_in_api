@@ -32,7 +32,7 @@ namespace CalculatorInApi.Services
 
         public bool CheckNumberInDivide(int num1, int num2)
         {
-            throw new System.NotImplementedException();
+            return num2 != 0;
         }
     }
 }

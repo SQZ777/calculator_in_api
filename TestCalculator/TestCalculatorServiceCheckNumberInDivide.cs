@@ -16,5 +16,13 @@ namespace TestCalculator
             var actual = calculatorService.CheckNumberInDivide(1, 1);
             Assert.IsTrue(actual);
         }
+
+        [TestMethod]
+        public void CheckNumberInDivide_1_0_Should_Be_false()
+        {
+            var calculatorService = new CalculatorService();
+            var actual = calculatorService.CheckNumberInDivide(1, 0);
+            Assert.IsFalse(actual);
+        }
     }
 }
