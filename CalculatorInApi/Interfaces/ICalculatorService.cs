@@ -10,5 +10,6 @@ namespace CalculatorInApi.Interfaces
         int Add(int number1, int number2);
 
         bool CheckNumber(long num1, long num2);
+        int Minus(int num1, int num2);
     }
 }

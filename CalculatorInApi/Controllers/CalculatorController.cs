@@ -26,5 +26,10 @@ namespace CalculatorInApi.Controllers
             }
             return BadRequest("InputIsIllegally");
         }
+
+        public IActionResult Minus(int num1, int num2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

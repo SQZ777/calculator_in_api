@@ -17,5 +17,10 @@ namespace CalculatorInApi.Services
             }
             return true;
         }
+
+        public int Minus(int num1, int num2)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
