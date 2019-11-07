@@ -17,7 +17,7 @@ namespace TestCalculator
         public void Divide_1_1_Should_Be_1_00()
         {
             var expect = new OkObjectResult("1.00");
-            var actual = TestDivideWhenExpectIsOk(1, 1, "1.00");
+            var actual = DivideWhenExpectIsOk(1, 1, "1.00");
             Assert.AreEqual(expect.Value, actual.Value);
         }
 
@@ -25,11 +25,11 @@ namespace TestCalculator
         public void Divide_1_3_Should_Be_0_33()
         {
             var expect = new OkObjectResult("0.33");
-            var actual = TestDivideWhenExpectIsOk(1, 3, "0.33");
+            var actual = DivideWhenExpectIsOk(1, 3, "0.33");
             Assert.AreEqual(expect.Value, actual.Value);
         }
 
-        private OkObjectResult TestDivideWhenExpectIsOk(int num1, int num2, string mockDivideReturn)
+        private OkObjectResult DivideWhenExpectIsOk(int num1, int num2, string mockDivideReturn)
         {
             var mockCalculatorService = new Mock<ICalculatorService>();
             mockCalculatorService.Setup(x => x.Divide(num1, num2)).Returns(mockDivideReturn);
