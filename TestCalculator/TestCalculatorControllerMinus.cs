@@ -22,6 +22,14 @@ namespace TestCalculator
         }
 
         [TestMethod]
+        public void Minus_m1_and_m1_Should_Be_0()
+        {
+            var actual = MinusWhenExpectIsOk(-1, -1, 0);
+            var expect = new OkObjectResult(0);
+            Assert.AreEqual(expect.Value, actual.Value);
+        }
+
+        [TestMethod]
         public void Minus_m2147483648_and_1_Should_Be_BadRequest_InputIsIllegally()
         {
             var actual = MinusWhenExpectIsBadRequest(-2147483648, 1);
