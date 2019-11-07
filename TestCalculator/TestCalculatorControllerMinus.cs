@@ -21,7 +21,7 @@ namespace TestCalculator
             var calculatorController = new CalculatorController(mockService.Object);
             var actual = calculatorController.Minus(1, 1) as OkObjectResult;
             var expect = new OkObjectResult(0);
-            Assert.AreEqual(expect, actual);
+            Assert.AreEqual(expect.Value, actual.Value);
 
         }
     }

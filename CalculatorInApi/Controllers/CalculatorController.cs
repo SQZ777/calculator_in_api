@@ -29,6 +29,7 @@ namespace CalculatorInApi.Controllers
 
         public IActionResult Minus(int num1, int num2)
         {
+            return Ok(_calculatorService.Minus(num1, num2));
             throw new NotImplementedException();
         }
     }
