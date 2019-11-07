@@ -16,11 +16,11 @@ namespace TestCalculator
         [TestMethod]
         public void Minus_1_and_1_Should_Be_0()
         {
-            var mockService = new Mock<ICalculatorService>();
-            mockService.Setup(x => x.Minus(1, 1)).Returns(0);
-            mockService.Setup(x => x.CheckNumber(1, 1)).Returns(true);
-            var calculatorController = new CalculatorController(mockService.Object);
-            var actual = calculatorController.Minus(1, 1) as OkObjectResult;
+            var num1 = 1;
+            var num2 = 1;
+            SetCalculatorController(num1, num2, false);
+            var calculatorController = SetCalculatorController(num1, num2, false);
+            var actual = calculatorController.Minus(num1, num2) as OkObjectResult;
             var expect = new OkObjectResult(0);
             Assert.AreEqual(expect.Value, actual.Value);
         }
@@ -28,14 +28,21 @@ namespace TestCalculator
         [TestMethod]
         public void Minus_m2147483648_and_1_Should_Be_BadRequest_InputIsIllegally()
         {
-            var mockService = new Mock<ICalculatorService>();
-            mockService.Setup(x => x.CheckNumber(-2147483648, 1)).Returns(false);
-            var calculatorController = new CalculatorController(mockService.Object);
-            var actual = calculatorController.Minus(-214783648, 1) as BadRequestObjectResult;
+            var num1 = -2147483648;
+            var num2 = 1;
+            SetCalculatorController(num1, num2, false);
+            var calculatorController = SetCalculatorController(num1, num2, false);
+            var actual = calculatorController.Minus(num1, num2) as BadRequestObjectResult;
             var expect = new BadRequestObjectResult("InputIsIllegally");
             Assert.AreEqual(expect.Value, actual.Value);
+        }
 
-
+        private CalculatorController SetCalculatorController(int num1, int num2, bool checkNumberShouldReturn)
+        {
+            var mockCalculatorService = new Mock<ICalculatorService>();
+            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(checkNumberShouldReturn);
+            mockCalculatorService.Setup(x => x.Add(num1, num2)).Returns(0);
+            return new CalculatorController(mockCalculatorService.Object);
         }
     }
 }
