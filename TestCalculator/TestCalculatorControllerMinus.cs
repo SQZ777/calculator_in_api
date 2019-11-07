@@ -34,6 +34,7 @@ namespace TestCalculator
             var expect = new BadRequestObjectResult("InputIsIllegally");
             Assert.AreEqual(expect.Value, actual.Value);
 
+
         }
     }
 }
