@@ -1,3 +1,4 @@
+using System;
 using CalculatorInApi.Interfaces;
 
 namespace CalculatorInApi.Services
@@ -25,7 +26,8 @@ namespace CalculatorInApi.Services
 
         public string Divide(int num1, int num2)
         {
-            throw new System.NotImplementedException();
+            var result = (double)(num1 / num2);
+            return result.ToString("0.00");
         }
 
         public bool CheckNumberInDivide(int num1, int num2)
