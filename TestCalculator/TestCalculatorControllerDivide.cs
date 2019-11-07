@@ -37,6 +37,14 @@ namespace TestCalculator
             Assert.AreEqual(expect.Value, actual.Value);
         }
 
+        [TestMethod]
+        public void Divide_1000000_0_Should_Be_BadRequest_InputIsIllegally()
+        {
+            var expect = new BadRequestObjectResult("InputIsIllegally");
+            var actual = DivideWhenExpectIsBadRequest(1000000, 0);
+            Assert.AreEqual(expect.Value, actual.Value);
+        }
+
         private BadRequestObjectResult DivideWhenExpectIsBadRequest(int num1, int num2)
         {
             var mockCalculatorService = new Mock<ICalculatorService>();
