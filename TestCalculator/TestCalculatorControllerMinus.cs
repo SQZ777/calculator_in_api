@@ -4,6 +4,7 @@ using System.Text;
 using CalculatorInApi.Controllers;
 using CalculatorInApi.Interfaces;
 using CalculatorInApi.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -18,8 +19,8 @@ namespace TestCalculator
             var mockService = new Mock<ICalculatorService>();
             mockService.Setup(x => x.Minus(1, 1)).Returns(0);
             var calculatorController = new CalculatorController(mockService.Object);
-            var actual = calculatorController.Minus(1, 1);
-            var expect = 0;
+            var actual = calculatorController.Minus(1, 1) as OkObjectResult;
+            var expect = new OkObjectResult(0);
             Assert.AreEqual(expect, actual);
 
         }
