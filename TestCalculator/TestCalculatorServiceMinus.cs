@@ -21,6 +21,12 @@ namespace TestCalculator
             TestMinus(-1, 1, -2);
         }
 
+        [TestMethod]
+        public void Minus_0_and_0_Should_Be_0()
+        {
+            TestMinus(0, 0, 0);
+        }
+
         private void TestMinus(int num1, int num2, int expect)
         {
             var calculatorService = new CalculatorService();
