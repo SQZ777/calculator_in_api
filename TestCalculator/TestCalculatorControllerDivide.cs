@@ -18,10 +18,11 @@ namespace TestCalculator
         {
             var num1 = 1;
             var num2 = 1;
-            var expect = new OkObjectResult(1);
+            var expect = new OkObjectResult((double)1);
 
             var mockCalculatorService = new Mock<ICalculatorService>();
             mockCalculatorService.Setup(x => x.Divide(num1, num2)).Returns(1);
+            mockCalculatorService.Setup(x => x.CheckNumber(num1, num1)).Returns(true);
             var controller = new CalculatorController(mockCalculatorService.Object);
             var actual = controller.Divide(num1, num2) as OkObjectResult;
             Assert.AreEqual(expect.Value, actual.Value);
