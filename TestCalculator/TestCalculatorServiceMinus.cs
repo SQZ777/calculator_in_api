@@ -12,22 +12,19 @@ namespace TestCalculator
         [TestMethod]
         public void Minus_1_and_1_Should_Be_0()
         {
-            var num1 = 1;
-            var num2 = 1;
-            var calculatorService = new CalculatorService();
-            var actual = calculatorService.Minus(num1, num2);
-            var expect = 0;
-            Assert.AreEqual(expect, actual);
+            TestMinus(1,1,0);
         }
 
         [TestMethod]
         public void Minus_m1_and_1_Should_Be_m2()
         {
-            var num1 = -1;
-            var num2 = 1;
+            TestMinus(-1, 1, -2);
+        }
+
+        private void TestMinus(int num1, int num2, int expect)
+        {
             var calculatorService = new CalculatorService();
             var actual = calculatorService.Minus(num1, num2);
-            var expect = -2;
             Assert.AreEqual(expect, actual);
         }
     }
