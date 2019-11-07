@@ -43,8 +43,7 @@ namespace CalculatorInApi.Controllers
             {
                 return Ok(_calculatorService.Divide(num1, num2));
             }
-
-            throw new NotImplementedException();
+            return BadRequest("InputIsIllegally");
         }
     }
 }
