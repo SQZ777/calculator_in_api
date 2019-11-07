@@ -63,13 +63,5 @@ namespace TestCalculator
             var actual = calculatorController.Minus(num1, num2) as BadRequestObjectResult;
             return actual;
         }
-
-        private CalculatorController SetCalculatorController(int num1, int num2, bool checkNumberShouldReturn)
-        {
-            var mockCalculatorService = new Mock<ICalculatorService>();
-            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(checkNumberShouldReturn);
-            mockCalculatorService.Setup(x => x.Add(num1, num2)).Returns(0);
-            return new CalculatorController(mockCalculatorService.Object);
-        }
     }
 }
