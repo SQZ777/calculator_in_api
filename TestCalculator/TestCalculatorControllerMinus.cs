@@ -30,6 +30,14 @@ namespace TestCalculator
         }
 
         [TestMethod]
+        public void Minus_m1_and_1_Should_Be_m2()
+        {
+            var actual = MinusWhenExpectIsOk(-1, 1, -2);
+            var expect = new OkObjectResult(-2);
+            Assert.AreEqual(expect.Value, actual.Value);
+        }
+
+        [TestMethod]
         public void Minus_m2147483648_and_1_Should_Be_BadRequest_InputIsIllegally()
         {
             var actual = MinusWhenExpectIsBadRequest(-2147483648, 1);
@@ -43,7 +51,7 @@ namespace TestCalculator
             mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(true);
             mockCalculatorService.Setup(x => x.Minus(num1, num2)).Returns(mockAddReturn);
             var calculatorController = new CalculatorController(mockCalculatorService.Object);
-            var actual = calculatorController.Add(num1, num2) as OkObjectResult;
+            var actual = calculatorController.Minus(num1, num2) as OkObjectResult;
             return actual;
         }
 
