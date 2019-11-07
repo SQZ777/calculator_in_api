@@ -26,7 +26,7 @@ namespace CalculatorInApi.Services
 
         public string Divide(int num1, int num2)
         {
-            var result = (double)(num1 / num2);
+            var result = (double)num1 / num2;
             return result.ToString("0.00");
         }
 

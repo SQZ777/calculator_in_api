@@ -17,5 +17,14 @@ namespace TestCalculator
             var expect = "1.00";
             Assert.AreEqual(expect, actual);
         }
+
+        [TestMethod]
+        public void Divide_1_3_Should_Be_0_33()
+        {
+            var calculatorService = new CalculatorService();
+            var actual = calculatorService.Divide(1, 3);
+            var expect = "0.33";
+            Assert.AreEqual(expect, actual);
+        }
     }
 }
