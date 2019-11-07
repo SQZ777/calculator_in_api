@@ -28,5 +28,19 @@ namespace TestCalculator
             Assert.AreEqual(expect.Value, actual.Value);
         }
 
+        [TestMethod]
+        public void Divide_1_3_Should_Be_0_33()
+        {
+            var num1 = 1;
+            var num2 = 3;
+            var expect = new OkObjectResult("0.33");
+
+            var mockCalculatorService = new Mock<ICalculatorService>();
+            mockCalculatorService.Setup(x => x.Divide(num1, num2)).Returns("0.33");
+            mockCalculatorService.Setup(x => x.CheckNumberInDivide(num1, num2)).Returns(true);
+            var calculatorController = new CalculatorController(mockCalculatorService.Object);
+            var actual = calculatorController.Divide(num1, num2) as OkObjectResult;
+            Assert.AreEqual(expect.Value, actual.Value);
+        }
     }
 }
