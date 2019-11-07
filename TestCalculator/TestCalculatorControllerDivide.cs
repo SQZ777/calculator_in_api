@@ -14,7 +14,7 @@ namespace TestCalculator
     public class TestCalculatorControllerDivide
     {
         [TestMethod]
-        public void Divide_1_1_Should_Be_1()
+        public void Divide_1_1_Should_Be_1_00()
         {
             var num1 = 1;
             var num2 = 1;
