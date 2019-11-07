@@ -16,31 +16,28 @@ namespace TestCalculator
         [TestMethod]
         public void Divide_1_1_Should_Be_1_00()
         {
-            var num1 = 1;
-            var num2 = 1;
             var expect = new OkObjectResult("1.00");
-
-            var mockCalculatorService = new Mock<ICalculatorService>();
-            mockCalculatorService.Setup(x => x.Divide(num1, num2)).Returns("1.00");
-            mockCalculatorService.Setup(x => x.CheckNumber(num1, num1)).Returns(true);
-            var controller = new CalculatorController(mockCalculatorService.Object);
-            var actual = controller.Divide(num1, num2) as OkObjectResult;
+            var actual = TestDivideWhenExpectIsOk(1, 1, "1.00");
             Assert.AreEqual(expect.Value, actual.Value);
         }
 
         [TestMethod]
         public void Divide_1_3_Should_Be_0_33()
         {
-            var num1 = 1;
-            var num2 = 3;
             var expect = new OkObjectResult("0.33");
-
-            var mockCalculatorService = new Mock<ICalculatorService>();
-            mockCalculatorService.Setup(x => x.Divide(num1, num2)).Returns("0.33");
-            mockCalculatorService.Setup(x => x.CheckNumberInDivide(num1, num2)).Returns(true);
-            var calculatorController = new CalculatorController(mockCalculatorService.Object);
-            var actual = calculatorController.Divide(num1, num2) as OkObjectResult;
+            var actual = TestDivideWhenExpectIsOk(1, 3, "0.33");
             Assert.AreEqual(expect.Value, actual.Value);
+        }
+
+        private OkObjectResult TestDivideWhenExpectIsOk(int num1, int num2, string mockDivideReturn)
+        {
+            var mockCalculatorService = new Mock<ICalculatorService>();
+            mockCalculatorService.Setup(x => x.Divide(num1, num2)).Returns(mockDivideReturn);
+            mockCalculatorService.Setup(x => x.CheckNumberInDivide(num1, num2)).Returns(true);
+            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(true);
+            var controller = new CalculatorController(mockCalculatorService.Object);
+            var actual = controller.Divide(num1, num2) as OkObjectResult;
+            return actual;
         }
     }
 }

@@ -39,7 +39,7 @@ namespace CalculatorInApi.Controllers
 
         public IActionResult Divide(int num1, int num2)
         {
-            if (_calculatorService.CheckNumber(num1, num2))
+            if (_calculatorService.CheckNumber(num1, num2) && _calculatorService.CheckNumberInDivide(num1, num2))
             {
                 return Ok(_calculatorService.Divide(num1, num2));
             }

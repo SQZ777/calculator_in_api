@@ -27,5 +27,10 @@ namespace CalculatorInApi.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public bool CheckNumberInDivide(int num1, int num2)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
