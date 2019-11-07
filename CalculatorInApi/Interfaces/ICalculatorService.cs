@@ -11,6 +11,6 @@ namespace CalculatorInApi.Interfaces
 
         bool CheckNumber(long num1, long num2);
         int Minus(int num1, int num2);
-        double Divide(int num1, int num2);
+        string Divide(int num1, int num2);
     }
 }
