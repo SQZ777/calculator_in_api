@@ -24,7 +24,7 @@ namespace CalculatorInApi.Controllers
             {
                 return Ok(_calculatorService.Add(num1, num2));
             }
-            return BadRequest(ModelState);
+            return BadRequest("InputIsIllegally");
         }
 
         [HttpGet("Minus")]
