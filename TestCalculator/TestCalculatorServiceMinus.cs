@@ -18,7 +18,6 @@ namespace TestCalculator
             var actual = calculatorService.Minus(num1, num2);
             var expect = 0;
             Assert.AreEqual(expect, actual);
-
         }
     }
 }
