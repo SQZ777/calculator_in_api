@@ -24,17 +24,22 @@ namespace CalculatorInApi.Controllers
             {
                 return Ok(_calculatorService.Add(num1, num2));
             }
-            return BadRequest("InputIsIllegally");
+            return BadRequest(ModelState);
         }
 
         [HttpGet("Minus")]
-        public IActionResult Minus(int num1, int num2)
+        public IActionResult Minus([FromQuery]int num1, int num2)
         {
             if (_calculatorService.CheckNumber(num1, num2))
             {
                 return Ok(_calculatorService.Minus(num1, num2));
             }
             return BadRequest("InputIsIllegally");
+        }
+
+        public IActionResult Divide(int num1, int num2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

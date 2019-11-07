@@ -22,5 +22,10 @@ namespace CalculatorInApi.Services
         {
             return num1 - num2;
         }
+
+        public double Divide(int num1, int num2)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
