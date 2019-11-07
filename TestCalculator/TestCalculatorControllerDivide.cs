@@ -29,6 +29,25 @@ namespace TestCalculator
             Assert.AreEqual(expect.Value, actual.Value);
         }
 
+        [TestMethod]
+        public void Divide_1_0_Should_Be_BadRequest_InputIsIllegally()
+        {
+            var expect = new BadRequestObjectResult("InputIsIllegally");
+            var actual = DivideWhenExpectIsBadRequest(1, 0);
+            Assert.AreEqual(expect.Value, actual.Value);
+        }
+
+        private BadRequestObjectResult DivideWhenExpectIsBadRequest(int num1, int num2)
+        {
+            var mockCalculatorService = new Mock<ICalculatorService>();
+            mockCalculatorService.Setup(x => x.Divide(num1, num2)).Returns(string.Empty);
+            mockCalculatorService.Setup(x => x.CheckNumberInDivide(num1, num2)).Returns(false);
+            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(true);
+            var controller = new CalculatorController(mockCalculatorService.Object);
+            var actual = controller.Divide(num1, num2) as BadRequestObjectResult;
+            return actual;
+        }
+
         private OkObjectResult DivideWhenExpectIsOk(int num1, int num2, string mockDivideReturn)
         {
             var mockCalculatorService = new Mock<ICalculatorService>();
