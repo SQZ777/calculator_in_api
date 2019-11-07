@@ -19,7 +19,7 @@ namespace TestCalculator
             var num1 = 1;
             var num2 = 1;
             SetCalculatorController(num1, num2, false);
-            var calculatorController = SetCalculatorController(num1, num2, false);
+            var calculatorController = SetCalculatorController(num1, num2, true);
             var actual = calculatorController.Minus(num1, num2) as OkObjectResult;
             var expect = new OkObjectResult(0);
             Assert.AreEqual(expect.Value, actual.Value);
