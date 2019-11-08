@@ -36,7 +36,7 @@ namespace CalculatorInApi.Controllers
             }
             return BadRequest("InputIsIllegally");
         }
-
+        [HttpGet("Divide")]
         public IActionResult Divide(int num1, int num2)
         {
             if (_calculatorService.CheckNumber(num1, num2) && _calculatorService.CheckNumberInDivide(num1, num2))
