@@ -35,5 +35,12 @@ namespace TestCalculator
             var expect = "3.00";
             Assert.AreEqual(expect, actual);
         }
+
+        [TestMethod]
+        public void Divide_3_0_ShouldThrow_DivideByZeroException()
+        {
+            var calculatorService = new CalculatorService();
+            Assert.ThrowsException<DivideByZeroException>(() => calculatorService.Divide(3, 0));
+        }
     }
 }

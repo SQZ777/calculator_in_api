@@ -12,7 +12,7 @@ namespace TestCalculator
         [TestMethod]
         public void Minus_1_and_1_Should_Be_0()
         {
-            TestMinus(1,1,0);
+            TestMinus(1, 1, 0);
         }
 
         [TestMethod]
@@ -25,6 +25,13 @@ namespace TestCalculator
         public void Minus_0_and_0_Should_Be_0()
         {
             TestMinus(0, 0, 0);
+        }
+
+        [TestMethod]
+        public void Minus_Input_IntMIN_and_10_Should_Overflow()
+        {
+            var calculatorService = new CalculatorService();
+            Assert.ThrowsException<OverflowException>(() => calculatorService.Minus(Int32.MinValue, 10));
         }
 
         private void TestMinus(int num1, int num2, int expect)

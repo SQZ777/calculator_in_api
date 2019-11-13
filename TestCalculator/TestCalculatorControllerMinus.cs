@@ -42,14 +42,14 @@ namespace TestCalculator
         {
             var actual = MinusWhenExpectIsBadRequest(-2147483648, 1);
             var expect = new BadRequestObjectResult("InputIsIllegally");
-            Assert.AreEqual(expect.Value, actual.Value);
+            Assert.AreEqual(expect.GetType(), actual.GetType());
         }
 
-        private OkObjectResult MinusWhenExpectIsOk(int num1, int num2, int mockAddReturn)
+        private OkObjectResult MinusWhenExpectIsOk(int num1, int num2, int mockReturn)
         {
             var mockCalculatorService = new Mock<ICalculatorService>();
-            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(true);
-            mockCalculatorService.Setup(x => x.Minus(num1, num2)).Returns(mockAddReturn);
+
+            mockCalculatorService.Setup(x => x.Minus(num1, num2)).Returns(mockReturn);
             var calculatorController = new CalculatorController(mockCalculatorService.Object);
             var actual = calculatorController.Minus(num1, num2) as OkObjectResult;
             return actual;
@@ -58,7 +58,7 @@ namespace TestCalculator
         private BadRequestObjectResult MinusWhenExpectIsBadRequest(int num1, int num2)
         {
             var mockCalculatorService = new Mock<ICalculatorService>();
-            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(false);
+            mockCalculatorService.Setup(x => x.Minus(num1, num2)).Throws(new OverflowException());
             var calculatorController = new CalculatorController(mockCalculatorService.Object);
             var actual = calculatorController.Minus(num1, num2) as BadRequestObjectResult;
             return actual;

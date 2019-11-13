@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using CalculatorInApi.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,7 +11,6 @@ namespace TestCalculator
         [TestMethod]
         public void Add_Input_0_and_0_Should_Return_0()
         {
-
             var actual = CalculatorServiceAdd(0, 0);
             var expect = 0;
             Assert.AreEqual(expect, actual);
@@ -46,6 +46,13 @@ namespace TestCalculator
             var actual = CalculatorServiceAdd(0, -1);
             var expect = -1;
             Assert.AreEqual(expect, actual);
+        }
+
+
+        [TestMethod]
+        public void Add_Input_IntMAX_and_10_Should_Overflow()
+        {
+            Assert.ThrowsException<OverflowException>(() => CalculatorServiceAdd(Int32.MaxValue, 10));
         }
 
         private int CalculatorServiceAdd(int num1, int num2)

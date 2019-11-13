@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CalculatorInApi.Interfaces;
+using CalculatorInApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculatorInApi.Controllers
@@ -12,38 +13,52 @@ namespace CalculatorInApi.Controllers
     public class CalculatorController : Controller
     {
         private readonly ICalculatorService _calculatorService;
+
         public CalculatorController(ICalculatorService calculatorService)
         {
             this._calculatorService = calculatorService;
         }
 
         [HttpGet("Add")]
-        public IActionResult Add([FromQuery]int num1, int num2)
+        public IActionResult Add([FromQuery] int num1, int num2)
         {
-            if (_calculatorService.CheckNumber(num1, num2))
+            try
             {
-                return Ok(_calculatorService.Add(num1, num2));
+                var result = _calculatorService.Add(num1, num2);
+                return Ok(result);
             }
-            return BadRequest("InputIsIllegally");
+            catch (OverflowException exception)
+            {
+                return BadRequest(exception.ToString());
+            }
         }
 
         [HttpGet("Minus")]
-        public IActionResult Minus([FromQuery]int num1, int num2)
+        public IActionResult Minus([FromQuery] int num1, int num2)
         {
-            if (_calculatorService.CheckNumber(num1, num2))
+            try
             {
-                return Ok(_calculatorService.Minus(num1, num2));
+                var result = _calculatorService.Minus(num1, num2);
+                return Ok(result);
             }
-            return BadRequest("InputIsIllegally");
+            catch (OverflowException exception)
+            {
+                return BadRequest(exception.ToString());
+            }
         }
+
         [HttpGet("Divide")]
         public IActionResult Divide(int num1, int num2)
         {
-            if (_calculatorService.CheckNumber(num1, num2) && _calculatorService.CheckNumberInDivide(num1, num2))
+            try
             {
-                return Ok(_calculatorService.Divide(num1, num2));
+                var result = _calculatorService.Divide(num1, num2);
+                return Ok(result);
             }
-            return BadRequest("InputIsIllegally");
+            catch (DivideByZeroException exception)
+            {
+                return BadRequest(exception.ToString());
+            }
         }
     }
 }

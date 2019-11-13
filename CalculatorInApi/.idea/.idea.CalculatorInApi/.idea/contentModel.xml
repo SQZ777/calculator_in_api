@@ -52,8 +52,6 @@
       <e p="TestCalculatorControllerDivide.cs" t="Include" />
       <e p="TestCalculatorControllerMinus.cs" t="Include" />
       <e p="TestCalculatorServiceAdd.cs" t="Include" />
-      <e p="TestCalculatorServiceCheckNumber.cs" t="Include" />
-      <e p="TestCalculatorServiceCheckNumberInDivide.cs" t="Include" />
       <e p="TestCalculatorServiceDivide.cs" t="Include" />
       <e p="TestCalculatorServiceMinus.cs" t="Include" />
     </e>

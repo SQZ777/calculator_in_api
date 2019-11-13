@@ -16,17 +16,17 @@ namespace TestCalculator
         [TestMethod]
         public void Add_0_and_0_Should_be_0()
         {
+            var actual = this.AddWhenExpectIsOk(0, 0, 0);
             var expect = new OkObjectResult(0);
-            var actual = AddWhenExpectIsOk(0, 0, 0);
             Assert.AreEqual(expect.Value, actual.Value);
         }
 
         [TestMethod]
-        public void Add_2147483647_and_1_Should_be_InputIsIllegally_and_StatusCode_400()
+        public void Add_IntMAX_and_1_Should_be_InputIsIllegally_and_StatusCode_400()
         {
-            var actual = AddWhenExpectIsBadRequest(2147483647, 1);
-            var expect = new BadRequestObjectResult("InputIsIllegally");
-            Assert.AreEqual(expect.Value, actual.Value);
+            var actual = AddWhenExpectIsBadRequest(Int32.MaxValue, 1);
+            var expect = new BadRequestObjectResult(new OverflowException().ToString());
+            Assert.AreEqual(expect.GetType(), actual.GetType());
         }
 
         [TestMethod]
@@ -34,13 +34,13 @@ namespace TestCalculator
         {
             var actual = AddWhenExpectIsBadRequest(-2147483648, -1);
             var expect = new BadRequestObjectResult("InputIsIllegally");
-            Assert.AreEqual(expect.Value, actual.Value);
+            Assert.AreEqual(expect.GetType(), actual.GetType());
         }
 
         private BadRequestObjectResult AddWhenExpectIsBadRequest(int num1, int num2)
         {
             var mockCalculatorService = new Mock<ICalculatorService>();
-            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(false);
+            mockCalculatorService.Setup(x => x.Add(num1, num2)).Throws(new OverflowException());
             var calculatorController = new CalculatorController(mockCalculatorService.Object);
             var actual = calculatorController.Add(num1, num2) as BadRequestObjectResult;
             return actual;
@@ -49,12 +49,10 @@ namespace TestCalculator
         private OkObjectResult AddWhenExpectIsOk(int num1, int num2, int mockAddReturn)
         {
             var mockCalculatorService = new Mock<ICalculatorService>();
-            mockCalculatorService.Setup(x => x.CheckNumber(num1, num2)).Returns(true);
             mockCalculatorService.Setup(x => x.Add(num1, num2)).Returns(mockAddReturn);
             var calculatorController = new CalculatorController(mockCalculatorService.Object);
             var actual = calculatorController.Add(num1, num2) as OkObjectResult;
             return actual;
         }
-
     }
 }
